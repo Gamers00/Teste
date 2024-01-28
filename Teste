@@ -1,1 +1,36 @@
+local admins = {"GAMERS_820", "yourUsername"}
 
+game.Players.PlayerAdded:Connect(function(plr)
+ 
+ if table.find(admins, plr.Name) then
+  
+  plr.Chatted:Connect(function(msg)
+   
+   local splitMsg = string.split(msg, " ")
+   
+   if splitMsg[1] == ".fling" and game.Players:FindFirstChild(splitMsg[2]) then
+    
+    local playerToFling = game.Players:FindFirstChild(splitMsg[2])
+    
+    if playerToFling.Character and playerToFling.Character.HumanoidRootPart then
+     
+     local velocity = Instance.new("BodyVelocity")
+     velocity.Velocity = Vector3.new(500,250,0)
+     velocity.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+     velocity.Parent = playerToFling.Character.HumanoidRootPart
+     wait(.25)
+     if velocity then
+      
+      velocity:Destroy()
+      
+     end
+     
+    end
+    
+   end
+   
+  end)
+  
+ end
+ 
+end)
